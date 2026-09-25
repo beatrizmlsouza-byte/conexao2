@@ -4,6 +4,8 @@ import { buscarAgendamentos } from './DAO/agendamento/agendamento.js'
 import { buscarConsultas } from './DAO/consulta/consulta.js'
 import { buscarEspecialidades } from './DAO/especialidade/especialidade.js'
 import { buscarMedicos } from './DAO/medico/medico.js'
+import { incluirPacientes } from './DAO/paciente/inserir_paciente.js'
+import { incluirMedicos } from './DAO/medico/inserir_medico.js'
 
 
 const app = express()
@@ -14,10 +16,13 @@ app.get('/ola', (req, res) => {
     res.json({ mensagem: 'Ola mundo !!!' })
 })
 
-app.get('/paciente', async (req, res) => {
-    let pacientes = await buscarPacientes()
-    res.json(pacientes)
-    
+app.post('/paciente', async (req, res) => {
+    let {nome, endereco, telefone, doencasPrevias, remedioDeUsoContinuo} = req.body
+    let infos = [nome, endereco, telefone, doencasPrevias, remedioDeUsoContinuo]
+
+    let resp = await incluirPacientes(infos)
+    //console.log(name, endereco, telefone, doencasPrevias, remedioDeUsoContinuo)
+    res.send(resp)
 })
 
 app.get('/consulta', async (req, res) => {
@@ -33,9 +38,13 @@ app.get('/especialidade', async (req, res) => {
   
 })
 
-app.get('/medico', async (req, res) => {
-  let pacientes = await buscarMedicos()
-  res.json(pacientes)
+app.post('/medico', async (req, res) => {
+  let {nome, endereco, telefone, crm, numeroRegistro} = req.body
+  let infos = [nome, endereco, telefone, crm, numeroRegistro]
+
+  let resp = await incluirMedicos(infos)
+  //console.log(name, endereco, telefone, doencasPrevias, remedioDeUsoContinuo)
+  res.send(resp)
   
 })
 
