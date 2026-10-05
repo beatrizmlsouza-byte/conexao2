@@ -7,8 +7,8 @@ async function conexao() {
         host: "127.0.0.1", 
         port: 3306,
         user: 'root', 
-        password: '1234', 
-        database: 'clinica_medica'
+        password: 'my-secret-pw', 
+        database: 'bdAula'
     })
     return pool
 } // <-- Fechando a função conexao

@@ -13,7 +13,7 @@ app.use(express.json())
 
 // Rota Base
 app.get('/ola', (req, res) => {
-    res.json({ mensagem: 'Ola mundo !!!' })
+    res.json({ usario })
 })
 
 app.post('/paciente', async (req, res) => {
